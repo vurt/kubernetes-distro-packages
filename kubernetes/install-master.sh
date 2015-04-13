@@ -130,7 +130,7 @@ case "$lsb_dist" in
 
       CODENAME=$(lsb_release -cs)
 
-      $sh_c "echo deb ${url}debian ${CODENAME} main > /etc/apt/sources.list.d/kismatic.list"
+      $sh_c "echo deb [arch=amd64] ${url}debian ${CODENAME} main > /etc/apt/sources.list.d/kismatic.list"
       $sh_c 'sleep 3; apt-get update;'
 
       $sh_c 'apt-get install -y -q kubernetes-master;'
