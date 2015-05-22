@@ -11,7 +11,7 @@
 
 fpm -s dir -n "kubernetes-master" \
 -p kubernetes/builds \
--C ./kubernetes/master -v 0.11.0 \
+-C ./kubernetes/master -v 0.17.0 \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
