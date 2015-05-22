@@ -23,7 +23,6 @@ fpm -s dir -n "etcd" \
 --vendor "Kismatic, Inc." \
 --description "Etcd binaries and services" \
 source/etcd/etcd=/usr/bin/etcd \
-source/etcd/etcd-migrate=/usr/bin/etcd-migrate \
 source/etcd/etcdctl=/usr/bin/etcdctl
 
 # build_rpm_master
@@ -45,7 +44,6 @@ fpm -s dir -n "etcd" \
 --vendor "Kismatic, Inc." \
 --description "Etcd binaries and services" \
 source/etcd/etcd=/usr/bin/etcd \
-source/etcd/etcd-migrate=/usr/bin/etcd-migrate \
 source/etcd/etcdctl=/usr/bin/etcdctl \
 services/systemd/etcd.service=/lib/systemd/system/etcd.service \
 config/systemd/etcd.conf=/etc/etcd/etcd.conf
