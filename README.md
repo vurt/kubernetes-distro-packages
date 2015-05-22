@@ -82,10 +82,10 @@ sudo service kubelet start
 ```
 
 ## Development Build Notes
-
+* Make sure to have fpm installed along with rpmbuild
 * extract [kubernetes-server-linux-amd64.tar.gz](https://github.com/GoogleCloudPlatform/kubernetes/releases) to kubernetes/source
-* set the version number in `./build_kubernetes`
-* run `./build_kubernetes`
+* set the version number in `./build_kubernetes.sh`
+* run `./build_kubernetes.sh`
 
 ## Requirements
 
