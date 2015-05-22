@@ -1,5 +1,20 @@
 #!/bin/bash
 
+K8S_VERSION=${K8S_VERSION:-0.18.1}
+rm -rf kubernetes/source/kubernetes/v$K8S_VERSION
+rm -f kubernetes/master/kubernetes-master-$K8S_VERSION-1.x86_64.rpm
+rm -f kubernetes/master/kubernetes-node-$K8S_VERSION-1.x86_64.rpm
+rm -f kubernetes/master/kubernetes-master_$K8S_VERSION_amd64.deb
+rm -f kubernetes/master/kubernetes-node_$K8S_VERSION_amd64.deb
+
+mkdir -p kubernetes/source/kubernetes/v$K8S_VERSION
+cd kubernetes/source/kubernetes/v$K8S_VERSION
+curl -L https://storage.googleapis.com/kubernetes-release/release/v$K8S_VERSION/kubernetes.tar.gz | tar xvz
+# Nightly
+# https://github.com/GoogleCloudPlatform/kubernetes/releases/download/v$K8S_VERSION/kubernetes.tar.gz
+tar xfvz kubernetes/server/kubernetes-server-linux-amd64.tar.gz
+cd ../../../../
+
 #build_deb_master
 
     # deb
@@ -11,7 +26,7 @@
 
 fpm -s dir -n "kubernetes-master" \
 -p kubernetes/builds \
--C ./kubernetes/master -v 0.17.1 \
+-C ./kubernetes/master -v $K8S_VERSION \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -32,13 +47,13 @@ fpm -s dir -n "kubernetes-master" \
 --vendor "Kismatic, Inc." \
 --description "Kubernetes master binaries and services" \
 --url "https://www.kismatic.com" \
-../source/kubernetes/server/bin/kube-apiserver=/usr/bin/kube-apiserver \
-../source/kubernetes/server/bin/kube-controller-manager=/usr/bin/kube-controller-manager \
-../source/kubernetes/server/bin/kube-scheduler=/usr/bin/kube-scheduler \
-../source/kubernetes/server/bin/kubectl=/usr/bin/kubectl \
-../source/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
-../source/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
-../source/kubernetes/server/bin/kubernetes=/usr/bin/kubernetes \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-apiserver=/usr/bin/kube-apiserver \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-controller-manager=/usr/bin/kube-controller-manager \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-scheduler=/usr/bin/kube-scheduler \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubectl=/usr/bin/kubectl \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubernetes=/usr/bin/kubernetes \
 etc/kubernetes/manifests
 
 
@@ -60,7 +75,7 @@ etc/kubernetes/manifests
 # {"BearerToken": "SF839TwEqeyO2mwbOtQMZFJ8nQIu7asb", "Insecure": true }
 fpm -s dir -n "kubernetes-node" \
 -p kubernetes/builds \
--C ./kubernetes/node -v 0.17.1 \
+-C ./kubernetes/node -v $K8S_VERSION \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -77,8 +92,8 @@ fpm -s dir -n "kubernetes-node" \
 --vendor "Kismatic, Inc." \
 --description "Kubernetes node binaries and services" \
 --url "https://www.kismatic.com" \
-../source/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
-../source/kubernetes/server/bin/kube-proxy=/usr/bin/kube-proxy \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-proxy=/usr/bin/kube-proxy \
 etc/kubernetes/manifests
 
 # build_rpm_master
@@ -87,7 +102,7 @@ etc/kubernetes/manifests
 
 fpm -s dir -n "kubernetes-master" \
 -p kubernetes/builds \
--C ./kubernetes/master -v 0.17.1 \
+-C ./kubernetes/master -v $K8S_VERSION \
 -d 'docker >= 1.3.0' \
 -t rpm --rpm-os linux \
 -a x86_64 \
@@ -101,13 +116,13 @@ fpm -s dir -n "kubernetes-master" \
 --vendor "Kismatic, Inc." \
 --description "Kubernetes master binaries and services" \
 --url "https://www.kismatic.com" \
-../source/kubernetes/server/bin/kube-apiserver=/usr/bin/kube-apiserver \
-../source/kubernetes/server/bin/kube-controller-manager=/usr/bin/kube-controller-manager \
-../source/kubernetes/server/bin/kube-scheduler=/usr/bin/kube-scheduler \
-../source/kubernetes/server/bin/kubectl=/usr/bin/kubectl \
-../source/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
-../source/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
-../source/kubernetes/server/bin/kubernetes=/usr/bin/kubernetes \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-apiserver=/usr/bin/kube-apiserver \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-controller-manager=/usr/bin/kube-controller-manager \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-scheduler=/usr/bin/kube-scheduler \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubectl=/usr/bin/kubectl \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubernetes=/usr/bin/kubernetes \
 services/systemd/kube-apiserver.service=/lib/systemd/system/kube-apiserver.service \
 services/systemd/kube-controller-manager.service=/lib/systemd/system/kube-controller-manager.service \
 services/systemd/kube-scheduler.service=/lib/systemd/system/kube-scheduler.service \
@@ -122,7 +137,7 @@ etc/kubernetes/manifests
 
 fpm -s dir -n "kubernetes-node" \
 -p kubernetes/builds \
--C ./kubernetes/node -v 0.17.1 \
+-C ./kubernetes/node -v $K8S_VERSION \
 -d 'docker >= 1.3.0' \
 -a x86_64 \
 -t rpm --rpm-os linux \
@@ -141,7 +156,7 @@ etc/kubernetes/node/kubelet.conf \
 etc/kubernetes/node/kube-proxy.conf \
 services/systemd/kubelet.service=/lib/systemd/system/kubelet.service \
 services/systemd/kube-proxy.service=/lib/systemd/system/kube-proxy.service \
-../source/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
-../source/kubernetes/server/bin/kube-proxy=/usr/bin/kube-proxy \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-proxy=/usr/bin/kube-proxy \
 etc/kubernetes/manifests
 
