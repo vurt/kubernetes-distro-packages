@@ -9,7 +9,7 @@
 
 fpm -s dir -n "etcd" \
 -p etcd/builds \
--C ./etcd -v 2.0.5 \
+-C ./etcd -v 2.0.11 \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -32,7 +32,7 @@ source/etcd/etcdctl=/usr/bin/etcdctl
 
 fpm -s dir -n "etcd" \
 -p etcd/builds \
--C ./etcd -v 2.0.5 \
+-C ./etcd -v 2.0.11 \
 -t rpm --rpm-os linux \
 -a x86_64 \
 --after-install etcd/scripts/rpm/after-install.sh \
