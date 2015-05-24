@@ -4,7 +4,6 @@ Documentation=https://github.com/GoogleCloudPlatform/kubernetes
 
 [Service]
 EnvironmentFile=-/etc/kubernetes/master/config.conf
-EnvironmentFile=-/etc/kubernetes/master/apiserver.conf
 EnvironmentFile=-/etc/kubernetes/master/controller-manager.conf
 User=kube-controller-manager
 ExecStart=/usr/bin/kube-controller-manager \
