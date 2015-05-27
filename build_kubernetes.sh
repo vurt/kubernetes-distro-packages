@@ -32,7 +32,11 @@ fpm -s dir -n "kubernetes-master" \
 --vendor "Kismatic, Inc." \
 --description "Kubernetes master binaries and services" \
 --url "https://www.kismatic.com" \
-../source/kubernetes/server/bin=/usr \
+../source/kubernetes/server/bin/kubelet=/usr/bin/kube-apiserver \
+../source/kubernetes/server/bin/kubelet=/usr/bin/kube-controller-manager \
+../source/kubernetes/server/bin/kubelet=/usr/bin/kube-scheduler \
+../source/kubernetes/server/bin/kubelet=/usr/bin/kubectl \
+../source/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
 etc/kubernetes/manifests
 
 
@@ -95,7 +99,11 @@ fpm -s dir -n "kubernetes-master" \
 --vendor "Kismatic, Inc." \
 --description "Kubernetes master binaries and services" \
 --url "https://www.kismatic.com" \
-../source/kubernetes/server/bin=/usr \
+../source/kubernetes/server/bin/kubelet=/usr/bin/kube-apiserver \
+../source/kubernetes/server/bin/kubelet=/usr/bin/kube-controller-manager \
+../source/kubernetes/server/bin/kubelet=/usr/bin/kube-scheduler \
+../source/kubernetes/server/bin/kubelet=/usr/bin/kubectl \
+../source/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
 services/systemd/kube-apiserver.service=/lib/systemd/system/kube-apiserver.service \
 services/systemd/kube-controller-manager.service=/lib/systemd/system/kube-controller-manager.service \
 services/systemd/kube-scheduler.service=/lib/systemd/system/kube-scheduler.service \
