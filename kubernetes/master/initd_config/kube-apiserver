@@ -1,6 +1,6 @@
 # TODO: generate and distribute tokens for other cloud providers.
 DAEMON_ARGS="$DAEMON_ARGS
---address=127.0.0.1 \
+--insecure_bind_address=0.0.0.0 \
 --etcd_servers=http://127.0.0.1:4001 \
 --portal_net=10.254.0.0/16 \
 --v=2 \
@@ -8,6 +8,6 @@ DAEMON_ARGS="$DAEMON_ARGS
 --allow_privileged=False \
 --kubelet_port=10250 \
 --runtime_config=api/v1beta3 \
---admission_control=NamespaceAutoProvision,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota"
+--admission_control=NamespaceAutoProvision,LimitRanger,SecurityContextDeny,ResourceQuota"
 
 #--tls_cert_file=/srv/kubernetes/server.cert --tls_private_key_file=/srv/kubernetes/server.key --secure_port=6443 --token_auth_file=/srv/kubernetes/known_tokens.csv

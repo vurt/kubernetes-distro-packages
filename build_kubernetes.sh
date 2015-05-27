@@ -11,7 +11,7 @@
 
 fpm -s dir -n "kubernetes-master" \
 -p kubernetes/builds \
--C ./kubernetes/master -v 0.17.0 \
+-C ./kubernetes/master -v 0.17.1 \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -32,7 +32,13 @@ fpm -s dir -n "kubernetes-master" \
 --vendor "Kismatic, Inc." \
 --description "Kubernetes master binaries and services" \
 --url "https://www.kismatic.com" \
-../source/kubernetes/server/bin=/usr \
+../source/kubernetes/server/bin/kube-apiserver=/usr/bin/kube-apiserver \
+../source/kubernetes/server/bin/kube-controller-manager=/usr/bin/kube-controller-manager \
+../source/kubernetes/server/bin/kube-scheduler=/usr/bin/kube-scheduler \
+../source/kubernetes/server/bin/kubectl=/usr/bin/kubectl \
+../source/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
+../source/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
+../source/kubernetes/server/bin/kubernetes=/usr/bin/kubernetes \
 etc/kubernetes/manifests
 
 
@@ -54,7 +60,7 @@ etc/kubernetes/manifests
 # {"BearerToken": "SF839TwEqeyO2mwbOtQMZFJ8nQIu7asb", "Insecure": true }
 fpm -s dir -n "kubernetes-node" \
 -p kubernetes/builds \
--C ./kubernetes/node -v 0.17.0 \
+-C ./kubernetes/node -v 0.17.1 \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -81,7 +87,7 @@ etc/kubernetes/manifests
 
 fpm -s dir -n "kubernetes-master" \
 -p kubernetes/builds \
--C ./kubernetes/master -v 0.17.0 \
+-C ./kubernetes/master -v 0.17.1 \
 -d 'docker >= 1.3.0' \
 -t rpm --rpm-os linux \
 -a x86_64 \
@@ -95,7 +101,13 @@ fpm -s dir -n "kubernetes-master" \
 --vendor "Kismatic, Inc." \
 --description "Kubernetes master binaries and services" \
 --url "https://www.kismatic.com" \
-../source/kubernetes/server/bin=/usr \
+../source/kubernetes/server/bin/kube-apiserver=/usr/bin/kube-apiserver \
+../source/kubernetes/server/bin/kube-controller-manager=/usr/bin/kube-controller-manager \
+../source/kubernetes/server/bin/kube-scheduler=/usr/bin/kube-scheduler \
+../source/kubernetes/server/bin/kubectl=/usr/bin/kubectl \
+../source/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
+../source/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
+../source/kubernetes/server/bin/kubernetes=/usr/bin/kubernetes \
 services/systemd/kube-apiserver.service=/lib/systemd/system/kube-apiserver.service \
 services/systemd/kube-controller-manager.service=/lib/systemd/system/kube-controller-manager.service \
 services/systemd/kube-scheduler.service=/lib/systemd/system/kube-scheduler.service \
@@ -110,7 +122,7 @@ etc/kubernetes/manifests
 
 fpm -s dir -n "kubernetes-node" \
 -p kubernetes/builds \
--C ./kubernetes/node -v 0.17.0 \
+-C ./kubernetes/node -v 0.17.1 \
 -d 'docker >= 1.3.0' \
 -a x86_64 \
 -t rpm --rpm-os linux \
