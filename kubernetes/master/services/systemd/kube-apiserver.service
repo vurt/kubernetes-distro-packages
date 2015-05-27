@@ -3,9 +3,9 @@ Description=Kubernetes API Server
 Documentation=https://github.com/GoogleCloudPlatform/kubernetes
 
 [Service]
-EnvironmentFile=-/etc/kubernetes/config.conf
-EnvironmentFile=-/etc/kubernetes/apiserver.conf
-User=kube
+EnvironmentFile=-/etc/kubernetes/master/config.conf
+EnvironmentFile=-/etc/kubernetes/master/apiserver.conf
+User=kube-apiserver
 ExecStart=/usr/bin/kube-apiserver \
       $KUBE_LOGTOSTDERR \
       $KUBE_LOG_LEVEL \
