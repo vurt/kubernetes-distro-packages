@@ -11,7 +11,7 @@
 
 fpm -s dir -n "kubernetes-master" \
 -p kubernetes/builds \
--C ./kubernetes/master -v 0.17.0 \
+-C ./kubernetes/master -v 0.17.1 \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -54,7 +54,7 @@ etc/kubernetes/manifests
 # {"BearerToken": "SF839TwEqeyO2mwbOtQMZFJ8nQIu7asb", "Insecure": true }
 fpm -s dir -n "kubernetes-node" \
 -p kubernetes/builds \
--C ./kubernetes/node -v 0.17.0 \
+-C ./kubernetes/node -v 0.17.1 \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -81,7 +81,7 @@ etc/kubernetes/manifests
 
 fpm -s dir -n "kubernetes-master" \
 -p kubernetes/builds \
--C ./kubernetes/master -v 0.17.0 \
+-C ./kubernetes/master -v 0.17.1 \
 -d 'docker >= 1.3.0' \
 -t rpm --rpm-os linux \
 -a x86_64 \
@@ -110,7 +110,7 @@ etc/kubernetes/manifests
 
 fpm -s dir -n "kubernetes-node" \
 -p kubernetes/builds \
--C ./kubernetes/node -v 0.17.0 \
+-C ./kubernetes/node -v 0.17.1 \
 -d 'docker >= 1.3.0' \
 -a x86_64 \
 -t rpm --rpm-os linux \
