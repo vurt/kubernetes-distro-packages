@@ -27,3 +27,5 @@ chgrp -R kube-scheduler /var/kube-scheduler
 mkdir -p -m 755 /var/run/kubernetes
 chown -R kube-apiserver /var/run/kubernetes
 chgrp -R kube-apiserver /var/run/kubernetes
+
+mkdir -p -m 755 /var/lib/kubelet
