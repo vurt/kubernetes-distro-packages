@@ -78,8 +78,6 @@ pickle-email-*.html
 .env
 .powenv
 /kubernetes/source
-/kubernetes/builds
 
 .vagrant
 etcd/source
-etcd/builds
