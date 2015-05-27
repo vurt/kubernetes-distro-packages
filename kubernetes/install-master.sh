@@ -136,12 +136,6 @@ case "$lsb_dist" in
       $sh_c 'apt-get install -y -q kubernetes-master;'
 
     )
-    if command_exists kubectl; then
-      (
-        set -x
-        $sh_c 'kubectl version'
-      ) || true
-    fi
 
     echo
     exit 0
