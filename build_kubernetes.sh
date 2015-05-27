@@ -32,11 +32,13 @@ fpm -s dir -n "kubernetes-master" \
 --vendor "Kismatic, Inc." \
 --description "Kubernetes master binaries and services" \
 --url "https://www.kismatic.com" \
-../source/kubernetes/server/bin/kubelet=/usr/bin/kube-apiserver \
-../source/kubernetes/server/bin/kubelet=/usr/bin/kube-controller-manager \
-../source/kubernetes/server/bin/kubelet=/usr/bin/kube-scheduler \
-../source/kubernetes/server/bin/kubelet=/usr/bin/kubectl \
+../source/kubernetes/server/bin/kube-apiserver=/usr/bin/kube-apiserver \
+../source/kubernetes/server/bin/kube-controller-manager=/usr/bin/kube-controller-manager \
+../source/kubernetes/server/bin/kube-scheduler=/usr/bin/kube-scheduler \
+../source/kubernetes/server/bin/kubectl=/usr/bin/kubectl \
 ../source/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
+../source/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
+../source/kubernetes/server/bin/kubernetes=/usr/bin/kubernetes \
 etc/kubernetes/manifests
 
 
@@ -99,11 +101,13 @@ fpm -s dir -n "kubernetes-master" \
 --vendor "Kismatic, Inc." \
 --description "Kubernetes master binaries and services" \
 --url "https://www.kismatic.com" \
-../source/kubernetes/server/bin/kubelet=/usr/bin/kube-apiserver \
-../source/kubernetes/server/bin/kubelet=/usr/bin/kube-controller-manager \
-../source/kubernetes/server/bin/kubelet=/usr/bin/kube-scheduler \
-../source/kubernetes/server/bin/kubelet=/usr/bin/kubectl \
+../source/kubernetes/server/bin/kube-apiserver=/usr/bin/kube-apiserver \
+../source/kubernetes/server/bin/kube-controller-manager=/usr/bin/kube-controller-manager \
+../source/kubernetes/server/bin/kube-scheduler=/usr/bin/kube-scheduler \
+../source/kubernetes/server/bin/kubectl=/usr/bin/kubectl \
 ../source/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
+../source/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
+../source/kubernetes/server/bin/kubernetes=/usr/bin/kubernetes \
 services/systemd/kube-apiserver.service=/lib/systemd/system/kube-apiserver.service \
 services/systemd/kube-controller-manager.service=/lib/systemd/system/kube-controller-manager.service \
 services/systemd/kube-scheduler.service=/lib/systemd/system/kube-scheduler.service \
