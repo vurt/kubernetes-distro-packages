@@ -29,9 +29,6 @@ To configure services, edit configuration files in `/etc/kubernetes/master` or `
 To override services, copy `/lib/systemd/system` to `/etc/systemd/system` to override. This allows you to customize local services without worrying about losing changes as the result of a package upgrade.
 
 
-Add minions to `kube-controller-manager.conf`
-When running on bare metal (or without a cloud config), set the `--machines=` flag to your static IPs to bootstrap nodes. Alternatively you could leave it blank, and manually register each node with `kubectl create node -f <file>` after it is up. https://github.com/GoogleCloudPlatform/kubernetes/blob/master/docs/node.md
-
 *Start services*
 sudo systemctl start kube-apiserver
 sudo systemctl start kube-scheduler
@@ -64,7 +61,6 @@ Install docker on [Ubuntu](https://docs.docker.com/installation/ubuntulinux/) or
 To configure services, edit the file with the same name in `/etc/default`
 
 Master
-kube-controller-manager: when running on bare metal (or without a cloud config), set the `--machines=` flag to your static IPs to bootstrap nodes. Alternatively you could leave it blank, and manually register each node with `kubectl create node -f <file>` after it is up. https://github.com/GoogleCloudPlatform/kubernetes/blob/master/docs/node.md
 
 ```bash
 sudo service kube-apiserver start
@@ -83,9 +79,22 @@ sudo service kubelet start
 
 ## Development Build Notes
 * Make sure to have fpm installed along with rpmbuild
-* extract [kubernetes-server-linux-amd64.tar.gz](https://github.com/GoogleCloudPlatform/kubernetes/releases) to kubernetes/source
-* set the version number in `./build_kubernetes.sh`
-* run `./build_kubernetes.sh`
+* run `K8S_VERSION=0.18.1 ./build_kubernetes.sh`
+
+### Vagrant Smoke tests
+- CentOS
+`$ cd vagrant/centos; vagrant destroy && vagrant up`
+`$ vagrant ssh master`
+`$ sudo K8S_VERSION=0.18.1 /vagrant/test/master.sh`
+`$ vagrant ssh node`
+`$ sudo K8S_VERSION=0.18.1 /vagrant/test/node.sh`
+
+-Ubuntu
+`$ cd vagrant/ubuntu; vagrant destroy && vagrant up`
+`$ vagrant ssh master`
+`$ sudo K8S_VERSION=0.18.1 /vagrant/test/master.sh`
+`$ vagrant ssh node`
+`$ sudo K8S_VERSION=0.18.1 /vagrant/test/node.sh`
 
 ## Requirements
 
