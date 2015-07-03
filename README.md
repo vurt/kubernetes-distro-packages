@@ -79,22 +79,34 @@ sudo service kubelet start
 
 ## Development Build Notes
 * Make sure to have fpm installed along with rpmbuild
-* run `K8S_VERSION=0.18.1 ./build_kubernetes.sh`
+* run `K8S_VERSION=0.20.2 ./build_kubernetes.sh`
 
 ### Vagrant Smoke tests
 - CentOS
-`$ cd vagrant/centos; vagrant destroy && vagrant up`
-`$ vagrant ssh master`
-`$ sudo K8S_VERSION=0.18.1 /vagrant/test/master.sh`
-`$ vagrant ssh node`
-`$ sudo K8S_VERSION=0.18.1 /vagrant/test/node.sh`
+```
+$ cd vagrant/centos; vagrant destroy && vagrant up
+$ vagrant ssh master
+$ sudo K8S_VERSION=0.20.2 /vagrant/test/master.sh
+$ vagrant ssh node
+$ sudo K8S_VERSION=0.20.2 /vagrant/test/node.sh
+```
 
 -Ubuntu
-`$ cd vagrant/ubuntu; vagrant destroy && vagrant up`
-`$ vagrant ssh master`
-`$ sudo K8S_VERSION=0.18.1 /vagrant/test/master.sh`
-`$ vagrant ssh node`
-`$ sudo K8S_VERSION=0.18.1 /vagrant/test/node.sh`
+```
+# Trusty
+$ cd vagrant/ubuntu/trusty; vagrant destroy && vagrant up
+$ vagrant ssh master
+$ sudo K8S_VERSION=0.20.2 /vagrant/test/master.sh
+$ vagrant ssh node
+$ sudo K8S_VERSION=0.20.2 /vagrant/test/node.sh
+
+#Vivid
+$ cd vagrant/ubuntu/vivid; vagrant destroy && vagrant up
+$ vagrant ssh master
+$ sudo K8S_VERSION=0.20.2 /vagrant/test/master.sh
+$ vagrant ssh node
+$ sudo K8S_VERSION=0.20.2 /vagrant/test/node.sh
+```
 
 ## Requirements
 

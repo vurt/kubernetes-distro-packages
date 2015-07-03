@@ -44,7 +44,8 @@ do_start()
         #   2 if daemon could not be started
         start-stop-daemon --start --quiet --background --no-close \
                 --make-pidfile --pidfile $PIDFILE \
-                --exec $DAEMON -c $DAEMON_USER --test > /dev/null \
+                --exec $DAEMON -c $DAEMON_USER --test -- \
+                $DAEMON_ARGS > /dev/null \
                 || return 1
         start-stop-daemon --start --quiet --background --no-close \
                 --make-pidfile --pidfile $PIDFILE \
