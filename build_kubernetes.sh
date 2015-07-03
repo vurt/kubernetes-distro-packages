@@ -59,7 +59,7 @@ etc/kubernetes/manifests
 # systemd version
 fpm -s dir -n "kubernetes-master" \
 -p kubernetes/builds/systemd \
--C ./kubernetes/master -v $K8S_VERSION \
+-C ./kubernetes/master -v "$K8S_VERSION.1" \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -89,6 +89,9 @@ etc/kubernetes/master/config.conf \
 etc/kubernetes/master/controller-manager.conf \
 etc/kubernetes/master/scheduler.conf \
 etc/kubernetes/manifests
+
+mv kubernetes/builds/systemd/kubernetes-master_"$K8S_VERSION"_amd64.deb kubernetes/builds/systemd/kubernetes-master_"$K8S_VERSION"_amd64~systemd.deb
+rm kubernetes/builds/systemd/kubernetes-master_"$K8S_VERSION"_amd64.deb
 
 
 # post launch script for addons
@@ -131,11 +134,10 @@ fpm -s dir -n "kubernetes-node" \
 etc/kubernetes/manifests
 
 
-
 # systemd version
 fpm -s dir -n "kubernetes-node" \
 -p kubernetes/builds/systemd \
--C ./kubernetes/node -v $K8S_VERSION \
+-C ./kubernetes/node -v "$K8S_VERSION.1" \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \

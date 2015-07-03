@@ -4,12 +4,16 @@
 While the concepts and architecture in Kubernetes represent years of experience designing and building large scale cluster manager at Google, the Kubernetes project is still under heavy development.  Expect bugs, design and API changes as we bring it to a stable, production product this year.
 
 
-## Quick Install (RedHat 7, CentOS 7, Debian 7, Ubuntu 14.x)
+## Quick Install (RedHat 7, CentOS 7, Debian 7, Ubuntu 14.x, 15.x)
 
 * Kubernetes master:
-`curl -sSL https://get.kismatic.com/kubernetes/master.sh | sudo sh`
+```
+curl -sSL https://get.kismatic.com/kubernetes/master.sh | sudo sh
+`
 * Kubernetes nodes:
-`curl -sSL https://get.kismatic.com/kubernetes/node.sh | sudo sh`
+```
+curl -sSL https://get.kismatic.com/kubernetes/node.sh | sudo sh
+```
 
 * Requirements:
   * Install [etcd](https://github.com/coreos/etcd) (on master or a separate etcd cluster)

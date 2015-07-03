@@ -86,13 +86,6 @@ case "$lsb_dist" in
     set -x
     $sh_c 'sleep 3; yum -y -q install kubernetes-master'
 
-    if command_exists kubectl; then
-      (
-        set -x
-        $sh_c 'kubectl version'
-      ) || true
-    fi
-
 
     echo
     exit 0

@@ -4,7 +4,7 @@ echo `wget -qO- https://get.docker.com/ | sh`
 
 echo "Installing node $K8S_VERSION locally"
 dpkg -P kubernetes-node
-echo `dpkg -i /kubernetes/kubernetes/builds/systemd/kubernetes-node_"$K8S_VERSION"_amd64.deb`
+echo `dpkg -i /kubernetes/kubernetes/builds/systemd/kubernetes-node_"$K8S_VERSION".1_amd64.deb`
 
 apt-get clean
 sleep 3
@@ -20,8 +20,8 @@ echo "service status with"
 echo `service --status-all`
 
 sleep 5
-echo "Testing api server with curl http://192.168.200.2:8080/api/v1beta3/nodes"
-echo `curl http://192.168.200.2:8080/api/v1beta3/nodes`
+echo "Testing api server with curl http://192.168.200.2:8080/api/v1/nodes"
+echo `curl http://192.168.200.2:8080/api/v1/nodes`
 
 sleep 1
 echo "Testing api server pod.."

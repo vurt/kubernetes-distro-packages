@@ -26,10 +26,10 @@ source/etcd/etcd=/usr/bin/etcd \
 source/etcd/etcdctl=/usr/bin/etcdctl
 
 
-# systemd version
+# systemd version - add a .1 to the version
 fpm -s dir -n "etcd" \
 -p etcd/builds/systemd \
--C ./etcd -v 2.0.11 \
+-C ./etcd -v 2.0.11.1 \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -46,7 +46,6 @@ source/etcd/etcd=/usr/bin/etcd \
 source/etcd/etcdctl=/usr/bin/etcdctl \
 services/systemd/etcd.service=/lib/systemd/system/etcd.service \
 config/systemd/etcd.conf=/etc/etcd/etcd.conf
-
 
 # build_rpm_master
     # rpm
