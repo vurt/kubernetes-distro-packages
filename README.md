@@ -4,12 +4,16 @@
 While the concepts and architecture in Kubernetes represent years of experience designing and building large scale cluster manager at Google, the Kubernetes project is still under heavy development.  Expect bugs, design and API changes as we bring it to a stable, production product this year.
 
 
-## Quick Install (RedHat 7, CentOS 7, Debian 7, Ubuntu 14.x)
+## Quick Install (RedHat 7, CentOS 7, Debian 7, Ubuntu 14.x, 15.x)
 
 * Kubernetes master:
-`curl -sSL https://get.kismatic.com/kubernetes/master.sh | sudo sh`
+```
+curl -sSL https://get.kismatic.com/kubernetes/master.sh | sudo sh
+`
 * Kubernetes nodes:
-`curl -sSL https://get.kismatic.com/kubernetes/node.sh | sudo sh`
+```
+curl -sSL https://get.kismatic.com/kubernetes/node.sh | sudo sh
+```
 
 * Requirements:
   * Install [etcd](https://github.com/coreos/etcd) (on master or a separate etcd cluster)
@@ -79,22 +83,34 @@ sudo service kubelet start
 
 ## Development Build Notes
 * Make sure to have fpm installed along with rpmbuild
-* run `K8S_VERSION=0.18.1 ./build_kubernetes.sh`
+* run `K8S_VERSION=0.20.2 ./build_kubernetes.sh`
 
 ### Vagrant Smoke tests
 - CentOS
-`$ cd vagrant/centos; vagrant destroy && vagrant up`
-`$ vagrant ssh master`
-`$ sudo K8S_VERSION=0.18.1 /vagrant/test/master.sh`
-`$ vagrant ssh node`
-`$ sudo K8S_VERSION=0.18.1 /vagrant/test/node.sh`
+```
+$ cd vagrant/centos; vagrant destroy && vagrant up
+$ vagrant ssh master
+$ sudo K8S_VERSION=0.20.2 /vagrant/test/master.sh
+$ vagrant ssh node
+$ sudo K8S_VERSION=0.20.2 /vagrant/test/node.sh
+```
 
 -Ubuntu
-`$ cd vagrant/ubuntu; vagrant destroy && vagrant up`
-`$ vagrant ssh master`
-`$ sudo K8S_VERSION=0.18.1 /vagrant/test/master.sh`
-`$ vagrant ssh node`
-`$ sudo K8S_VERSION=0.18.1 /vagrant/test/node.sh`
+```
+# Trusty
+$ cd vagrant/ubuntu/trusty; vagrant destroy && vagrant up
+$ vagrant ssh master
+$ sudo K8S_VERSION=0.20.2 /vagrant/test/master.sh
+$ vagrant ssh node
+$ sudo K8S_VERSION=0.20.2 /vagrant/test/node.sh
+
+#Vivid
+$ cd vagrant/ubuntu/vivid; vagrant destroy && vagrant up
+$ vagrant ssh master
+$ sudo K8S_VERSION=0.20.2 /vagrant/test/master.sh
+$ vagrant ssh node
+$ sudo K8S_VERSION=0.20.2 /vagrant/test/node.sh
+```
 
 ## Requirements
 

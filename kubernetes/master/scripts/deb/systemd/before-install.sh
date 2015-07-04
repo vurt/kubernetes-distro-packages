@@ -32,10 +32,9 @@ chgrp -R kube-apiserver /var/run/kubernetes
 
 mkdir -p -m 755 /var/lib/kubelet
 
-
 SERVICE_ACCOUNT_KEY="/var/kubernetes/kube-serviceaccount.key"
 # Generate ServiceAccount key if needed
-if [[ ! -f "${SERVICE_ACCOUNT_KEY}" ]]; then
+if [ ! -f "${SERVICE_ACCOUNT_KEY}" ]; then
   mkdir -p "$(dirname ${SERVICE_ACCOUNT_KEY})"
   openssl genrsa -out "${SERVICE_ACCOUNT_KEY}" 2048 2>/dev/null
 fi

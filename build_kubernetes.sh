@@ -1,6 +1,6 @@
 #!/bin/bash
 
-K8S_VERSION=${K8S_VERSION:-0.18.1}
+K8S_VERSION=${K8S_VERSION:-0.20.2}
 rm -rf kubernetes/source/kubernetes/v$K8S_VERSION
 rm -f kubernetes/master/kubernetes-master-$K8S_VERSION-1.x86_64.rpm
 rm -f kubernetes/master/kubernetes-node-$K8S_VERSION-1.x86_64.rpm
@@ -56,6 +56,43 @@ fpm -s dir -n "kubernetes-master" \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubernetes=/usr/bin/kubernetes \
 etc/kubernetes/manifests
 
+# systemd version
+fpm -s dir -n "kubernetes-master" \
+-p kubernetes/builds/systemd \
+-C ./kubernetes/master -v "$K8S_VERSION.1" \
+-t deb \
+-a amd64 \
+-d "dpkg (>= 1.17)" \
+--after-install kubernetes/master/scripts/deb/systemd/after-install.sh \
+--before-install kubernetes/master/scripts/deb/systemd/before-install.sh \
+--after-remove kubernetes/master/scripts/deb/systemd/after-remove.sh \
+--before-remove kubernetes/master/scripts/deb/systemd/before-remove.sh \
+--license "Apache Software License 2.0" \
+--maintainer "Kismatic, Inc. <info@kismatic.com>" \
+--vendor "Kismatic, Inc." \
+--description "Kubernetes master binaries and services" \
+--url "https://www.kismatic.com" \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-apiserver=/usr/bin/kube-apiserver \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-controller-manager=/usr/bin/kube-controller-manager \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-scheduler=/usr/bin/kube-scheduler \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubectl=/usr/bin/kubectl \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubernetes=/usr/bin/kubernetes \
+services/systemd/kube-apiserver.service=/lib/systemd/system/kube-apiserver.service \
+services/systemd/kube-controller-manager.service=/lib/systemd/system/kube-controller-manager.service \
+services/systemd/kube-scheduler.service=/lib/systemd/system/kube-scheduler.service \
+services/systemd/kubelet.service=/lib/systemd/system/kubelet.service \
+etc/kubernetes/master/kubelet.conf \
+etc/kubernetes/master/apiserver.conf \
+etc/kubernetes/master/config.conf \
+etc/kubernetes/master/controller-manager.conf \
+etc/kubernetes/master/scheduler.conf \
+etc/kubernetes/manifests
+
+mv kubernetes/builds/systemd/kubernetes-master_"$K8S_VERSION"_amd64.deb kubernetes/builds/systemd/kubernetes-master_"$K8S_VERSION"_amd64~systemd.deb
+rm kubernetes/builds/systemd/kubernetes-master_"$K8S_VERSION"_amd64.deb
+
 
 # post launch script for addons
 # skydns enable
@@ -92,6 +129,33 @@ fpm -s dir -n "kubernetes-node" \
 --vendor "Kismatic, Inc." \
 --description "Kubernetes node binaries and services" \
 --url "https://www.kismatic.com" \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
+../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-proxy=/usr/bin/kube-proxy \
+etc/kubernetes/manifests
+
+
+# systemd version
+fpm -s dir -n "kubernetes-node" \
+-p kubernetes/builds/systemd \
+-C ./kubernetes/node -v "$K8S_VERSION.1" \
+-t deb \
+-a amd64 \
+-d "dpkg (>= 1.17)" \
+--after-install kubernetes/node/scripts/deb/systemd/after-install.sh \
+--before-install kubernetes/node/scripts/deb/systemd/before-install.sh \
+--after-remove kubernetes/node/scripts/deb/systemd/after-remove.sh \
+--before-remove kubernetes/node/scripts/deb/systemd/before-remove.sh \
+--config-files etc/kubernetes/node \
+--license "Apache Software License 2.0" \
+--maintainer "Kismatic, Inc. <info@kismatic.com>" \
+--vendor "Kismatic, Inc." \
+--description "Kubernetes node binaries and services" \
+--url "https://www.kismatic.com" \
+etc/kubernetes/node/config.conf \
+etc/kubernetes/node/kubelet.conf \
+etc/kubernetes/node/kube-proxy.conf \
+services/systemd/kubelet.service=/lib/systemd/system/kubelet.service \
+services/systemd/kube-proxy.service=/lib/systemd/system/kube-proxy.service \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-proxy=/usr/bin/kube-proxy \
 etc/kubernetes/manifests

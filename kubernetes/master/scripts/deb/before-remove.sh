@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # if [ $1 -eq 0 ] ; then
         # Package removal, not upgrade
         chkconfig kube-apiserver off >/dev/null 2>&1 || :

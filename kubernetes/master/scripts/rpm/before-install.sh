@@ -1,3 +1,5 @@
+#!/bin/bash
+
 getent group kube-apiserver >/dev/null || groupadd -r kube-apiserver
 getent passwd kube-apiserver >/dev/null || useradd -r -g kube-apiserver -d /var/kube-apiserver -s /sbin/nologin \
         -c "Kubernetes apiserver user" kube-apiserver
