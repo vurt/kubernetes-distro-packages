@@ -59,7 +59,7 @@ etc/kubernetes/manifests
 # systemd version
 fpm -s dir -n "kubernetes-master" \
 -p kubernetes/builds/systemd \
--C ./kubernetes/master -v "$K8S_VERSION.1" \
+-C ./kubernetes/master -v "$K8S_VERSION" \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -137,7 +137,7 @@ etc/kubernetes/manifests
 # systemd version
 fpm -s dir -n "kubernetes-node" \
 -p kubernetes/builds/systemd \
--C ./kubernetes/node -v "$K8S_VERSION.1" \
+-C ./kubernetes/node -v "$K8S_VERSION" \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -223,4 +223,3 @@ services/systemd/kube-proxy.service=/lib/systemd/system/kube-proxy.service \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-proxy=/usr/bin/kube-proxy \
 etc/kubernetes/manifests
-
