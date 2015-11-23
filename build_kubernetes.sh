@@ -59,7 +59,7 @@ etc/kubernetes/manifests
 # systemd version
 fpm -s dir -n "kubernetes-master" \
 -p kubernetes/builds/systemd \
--C ./kubernetes/master -v "$K8S_VERSION" \
+-C ./kubernetes/master -v "$K8S_VERSION.0" \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -137,7 +137,7 @@ etc/kubernetes/manifests
 # systemd version
 fpm -s dir -n "kubernetes-node" \
 -p kubernetes/builds/systemd \
--C ./kubernetes/node -v "$K8S_VERSION" \
+-C ./kubernetes/node -v "$K8S_VERSION.0" \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
