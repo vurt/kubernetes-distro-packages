@@ -10,7 +10,6 @@
 
         chmod +x /usr/bin/kubectl
         chmod +x /usr/bin/hyperkube
-        chmod +x /usr/bin/kubernetes
 
         update-rc.d kube-apiserver defaults >/dev/null 2>&1 || :
         update-rc.d kube-scheduler defaults >/dev/null 2>&1 || :
