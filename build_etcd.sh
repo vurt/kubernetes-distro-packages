@@ -40,7 +40,7 @@ source/etcdctl=/usr/bin/etcdctl
 # systemd version - add a .0 to the version
 fpm -s dir -n "etcd" \
 -p etcd/builds/systemd \
--C ./etcd -v "$ETCD_VERSION.0" \
+-C ./etcd -v "$ETCD_VERSION~systemd" \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \

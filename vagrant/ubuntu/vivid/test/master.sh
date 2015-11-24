@@ -3,7 +3,7 @@ echo "Installing Docker"
 # echo `wget -qO- https://get.docker.com/ | sh`
 
 echo "Installing etcd locally"
-echo `dpkg -i /kubernetes/etcd/builds/systemd/etcd_2.0.11.0_amd64.deb`
+echo `dpkg -i /kubernetes/etcd/builds/systemd/etcd_2.2.2~systemd_amd64.deb`
 
 sleep 1
 echo "service etcd start..."
@@ -12,7 +12,7 @@ echo `service etcd start`
 echo "Installing master $K8S_VERSION locally"
 dpkg -P kubernetes-master
 sleep 1
-echo `dpkg -i /kubernetes/kubernetes/builds/systemd/kubernetes-master_"$K8S_VERSION".0_amd64.deb`
+echo `dpkg -i /kubernetes/kubernetes/builds/systemd/kubernetes-master_"$K8S_VERSION"~systemd_amd64.deb`
 
 apt-get clean
 
