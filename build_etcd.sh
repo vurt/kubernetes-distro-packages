@@ -6,10 +6,21 @@
     # --deb-default FILEPATH        (deb only) Add FILEPATH as /etc/default configuration
     # --deb-upstart FILEPATH        (deb only) Add FILEPATH as an upstart script
 
+ETCD_VERSION=2.2.2
+
+rm -rf etcd/source
+mkdir etcd/source
+rm -f etcd/builds/etcd-$ETCD_VERSION-1.x86_64.rpm
+rm -f etcd/builds/etcd-$ETCD_VERSION-1.x86_64.rpm
+rm -f etcd/builds/etcd-$ETCD_VERSION-1.x86_64.rpm
+rm -f etcd/builds/etcd-$ETCD_VERSION-1.x86_64.rpm
+
+
+curl -L  https://github.com/coreos/etcd/releases/download/v$ETCD_VERSION/etcd-v$ETCD_VERSION-linux-amd64.tar.gz | tar xvz -C etcd/source --strip-components 1
 
 fpm -s dir -n "etcd" \
 -p etcd/builds \
--C ./etcd -v 2.0.11 \
+-C ./etcd -v "$ETCD_VERSION" \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -22,14 +33,14 @@ fpm -s dir -n "etcd" \
 --maintainer "Kismatic, Inc. <info@kismatic.com>" \
 --vendor "Kismatic, Inc." \
 --description "Etcd binaries and services" \
-source/etcd/etcd=/usr/bin/etcd \
-source/etcd/etcdctl=/usr/bin/etcdctl
+source/etcd=/usr/bin/etcd \
+source/etcdctl=/usr/bin/etcdctl
 
 
-# systemd version - add a .1 to the version
+# systemd version - add a .0 to the version
 fpm -s dir -n "etcd" \
 -p etcd/builds/systemd \
--C ./etcd -v 2.0.11.1 \
+-C ./etcd -v "$ETCD_VERSION.0" \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -42,8 +53,8 @@ fpm -s dir -n "etcd" \
 --maintainer "Kismatic, Inc. <info@kismatic.com>" \
 --vendor "Kismatic, Inc." \
 --description "Etcd binaries and services" \
-source/etcd/etcd=/usr/bin/etcd \
-source/etcd/etcdctl=/usr/bin/etcdctl \
+source/etcd=/usr/bin/etcd \
+source/etcdctl=/usr/bin/etcdctl \
 services/systemd/etcd.service=/lib/systemd/system/etcd.service \
 config/systemd/etcd.conf=/etc/etcd/etcd.conf
 
@@ -53,7 +64,7 @@ config/systemd/etcd.conf=/etc/etcd/etcd.conf
 
 fpm -s dir -n "etcd" \
 -p etcd/builds \
--C ./etcd -v 2.0.11 \
+-C ./etcd -v "$ETCD_VERSION" \
 -t rpm --rpm-os linux \
 -a x86_64 \
 --after-install etcd/scripts/rpm/after-install.sh \
@@ -65,7 +76,7 @@ fpm -s dir -n "etcd" \
 --maintainer "Kismatic, Inc. <info@kismatic.com>" \
 --vendor "Kismatic, Inc." \
 --description "Etcd binaries and services" \
-source/etcd/etcd=/usr/bin/etcd \
-source/etcd/etcdctl=/usr/bin/etcdctl \
+source/etcd=/usr/bin/etcd \
+source/etcdctl=/usr/bin/etcdctl \
 services/systemd/etcd.service=/lib/systemd/system/etcd.service \
 config/systemd/etcd.conf=/etc/etcd/etcd.conf
