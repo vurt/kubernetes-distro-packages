@@ -9,7 +9,8 @@ While the concepts and architecture in Kubernetes represent years of experience 
 * Kubernetes master:
 ```
 curl -sSL https://get.kismatic.com/kubernetes/master.sh | sudo sh
-`
+```
+
 * Kubernetes nodes:
 ```
 curl -sSL https://get.kismatic.com/kubernetes/node.sh | sudo sh
@@ -19,12 +20,17 @@ curl -sSL https://get.kismatic.com/kubernetes/node.sh | sudo sh
   * Install [etcd](https://github.com/coreos/etcd) (on master or a separate etcd cluster)
   * Install [docker](https://docs.docker.com/installation) (ubuntu/debian only)
 
+## Configuration and Manual Setup
 
-##Configuration and Manual Setup
 ### System.d and RedHat 7 / CentOS 7 Configuration
-`rpm -Uvh https://repos.kismatic.com/el/7/x86_64/kismatic-repo-el-7-1.x86_64.rpm`
-Master: `sudo yum install kubernetes-master`
-Nodes: `sudo yum kubernetes-node`
+
+The quick start scripts above will automatically add the kismatic repository as a source. Alternatively, you can manually add it with the command:
+```
+rpm -Uvh https://repos.kismatic.com/el/7/x86_64/kismatic-repo-el-7-1.x86_64.rpm
+```
+
+Manually Install Master: `sudo yum install kubernetes-master`
+Manually Install Nodes: `sudo yum kubernetes-node`
 
 #### Configure Kubernetes Master
 
@@ -112,36 +118,36 @@ sudo service kubelet start
 
 ## Development Build Notes
 * Make sure to have fpm installed along with rpmbuild
-* run `K8S_VERSION=0.20.2 ./build_kubernetes.sh`
+* run `K8S_VERSION=1.1.2 ./build_kubernetes.sh`
 
 ### Vagrant Smoke tests
 - CentOS
 ```
 $ cd vagrant/centos; vagrant destroy && vagrant up
 $ vagrant ssh master
-$ sudo K8S_VERSION=0.20.2 /vagrant/test/master.sh
+$ sudo K8S_VERSION=1.1.2 /vagrant/test/master.sh
 $ vagrant ssh node
-$ sudo K8S_VERSION=0.20.2 /vagrant/test/node.sh
+$ sudo K8S_VERSION=1.1.2 /vagrant/test/node.sh
 ```
 
--Ubuntu
+- Ubuntu
 ```
 # Trusty
 $ cd vagrant/ubuntu/trusty; vagrant destroy && vagrant up
 $ vagrant ssh master
-$ sudo K8S_VERSION=0.20.2 /vagrant/test/master.sh
+$ sudo K8S_VERSION=1.1.2 /vagrant/test/master.sh
 $ vagrant ssh node
-$ sudo K8S_VERSION=0.20.2 /vagrant/test/node.sh
+$ sudo K8S_VERSION=1.1.2 /vagrant/test/node.sh
 
-#Vivid
+# Vivid
 $ cd vagrant/ubuntu/vivid; vagrant destroy && vagrant up
 $ vagrant ssh master
-$ sudo K8S_VERSION=0.20.2 /vagrant/test/master.sh
+$ sudo K8S_VERSION=1.1.2 /vagrant/test/master.sh
 $ vagrant ssh node
-$ sudo K8S_VERSION=0.20.2 /vagrant/test/node.sh
+$ sudo K8S_VERSION=1.1.2 /vagrant/test/node.sh
 ```
 
-## Requirements
+## Development Requirements
 
 * ruby
 * prerequisites:
