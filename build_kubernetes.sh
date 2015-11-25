@@ -1,6 +1,6 @@
 #!/bin/bash
 
-K8S_VERSION=${K8S_VERSION:-0.20.2}
+K8S_VERSION=${K8S_VERSION:-1.1.2}
 rm -rf kubernetes/source/kubernetes/v$K8S_VERSION
 rm -f kubernetes/master/kubernetes-master-$K8S_VERSION-1.x86_64.rpm
 rm -f kubernetes/master/kubernetes-node-$K8S_VERSION-1.x86_64.rpm
@@ -53,13 +53,12 @@ fpm -s dir -n "kubernetes-master" \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubectl=/usr/bin/kubectl \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
-../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubernetes=/usr/bin/kubernetes \
 etc/kubernetes/manifests
 
 # systemd version
 fpm -s dir -n "kubernetes-master" \
 -p kubernetes/builds/systemd \
--C ./kubernetes/master -v "$K8S_VERSION" \
+-C ./kubernetes/master -v "$K8S_VERSION~systemd" \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -78,7 +77,6 @@ fpm -s dir -n "kubernetes-master" \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubectl=/usr/bin/kubectl \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
-../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubernetes=/usr/bin/kubernetes \
 services/systemd/kube-apiserver.service=/lib/systemd/system/kube-apiserver.service \
 services/systemd/kube-controller-manager.service=/lib/systemd/system/kube-controller-manager.service \
 services/systemd/kube-scheduler.service=/lib/systemd/system/kube-scheduler.service \
@@ -89,9 +87,6 @@ etc/kubernetes/master/config.conf \
 etc/kubernetes/master/controller-manager.conf \
 etc/kubernetes/master/scheduler.conf \
 etc/kubernetes/manifests
-
-mv kubernetes/builds/systemd/kubernetes-master_"$K8S_VERSION"_amd64.deb kubernetes/builds/systemd/kubernetes-master_"$K8S_VERSION"_amd64~systemd.deb
-rm kubernetes/builds/systemd/kubernetes-master_"$K8S_VERSION"_amd64.deb
 
 
 # post launch script for addons
@@ -137,7 +132,7 @@ etc/kubernetes/manifests
 # systemd version
 fpm -s dir -n "kubernetes-node" \
 -p kubernetes/builds/systemd \
--C ./kubernetes/node -v "$K8S_VERSION" \
+-C ./kubernetes/node -v "$K8S_VERSION~systemd" \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
@@ -186,7 +181,6 @@ fpm -s dir -n "kubernetes-master" \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubectl=/usr/bin/kubectl \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
-../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubernetes=/usr/bin/kubernetes \
 services/systemd/kube-apiserver.service=/lib/systemd/system/kube-apiserver.service \
 services/systemd/kube-controller-manager.service=/lib/systemd/system/kube-controller-manager.service \
 services/systemd/kube-scheduler.service=/lib/systemd/system/kube-scheduler.service \

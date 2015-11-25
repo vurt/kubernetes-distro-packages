@@ -20,7 +20,7 @@ DAEMON=/usr/bin/kube-apiserver
 DAEMON_LOG_FILE=/var/log/$NAME.log
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
-DAEMON_USER=kube-apiserver
+DAEMON_USER=kube
 
 # Exit if the package is not installed
 [ -x "$DAEMON" ] || exit 0

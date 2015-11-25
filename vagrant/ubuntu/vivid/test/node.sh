@@ -4,7 +4,7 @@ echo `wget -qO- https://get.docker.com/ | sh`
 
 echo "Installing node $K8S_VERSION locally"
 dpkg -P kubernetes-node
-echo `dpkg -i /kubernetes/kubernetes/builds/systemd/kubernetes-node_"$K8S_VERSION".1_amd64.deb`
+echo `dpkg -i /kubernetes/kubernetes/builds/systemd/kubernetes-node_"$K8S_VERSION"~systemd_amd64.deb`
 
 apt-get clean
 sleep 3
