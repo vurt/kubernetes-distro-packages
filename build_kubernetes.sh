@@ -162,7 +162,7 @@ etc/kubernetes/manifests
 fpm -s dir -n "kubernetes-master" \
 -p kubernetes/builds \
 -C ./kubernetes/master -v $K8S_VERSION \
--d 'docker >= 1.3.0' \
+-d 'docker-engine >= 1.7.0' \
 -t rpm --rpm-os linux \
 -a x86_64 \
 --after-install kubernetes/master/scripts/rpm/after-install.sh \
@@ -196,7 +196,7 @@ etc/kubernetes/manifests
 fpm -s dir -n "kubernetes-node" \
 -p kubernetes/builds \
 -C ./kubernetes/node -v $K8S_VERSION \
--d 'docker >= 1.3.0' \
+-d 'docker-engine >= 1.7.0' \
 -a x86_64 \
 -t rpm --rpm-os linux \
 --after-install kubernetes/node/scripts/rpm/after-install.sh \
