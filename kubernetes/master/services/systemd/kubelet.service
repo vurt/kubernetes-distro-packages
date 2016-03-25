@@ -3,10 +3,8 @@ Description=Kubernetes Kubelet Server
 Documentation=https://github.com/GoogleCloudPlatform/kubernetes
 After=etcd.service
 After=docker.service
-After=cadvisor.service
 Wants=etcd.service
 Wants=docker.service
-Wants=cadvisor.service
 
 [Service]
 WorkingDirectory=/var/lib/kubelet
