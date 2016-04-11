@@ -26,7 +26,7 @@ rpm -Uvh https://repos.kismatic.com/el/7/x86_64/kismatic-repo-el-7-1.x86_64.rpm
 ```
 
 Manually Install Master: `sudo yum install kubernetes-master`
-Manually Install Nodes: `sudo yum kubernetes-node`
+Manually Install Nodes: `sudo yum install kubernetes-node`
 
 #### Configure Kubernetes Master
 
