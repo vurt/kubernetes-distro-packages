@@ -1,5 +1,5 @@
 echo "Installing etcd locally"
-echo `yum -y --nogpgcheck localinstall /kubernetes/etcd/builds/etcd-2.0.11-1.x86_64.rpm`
+echo `yum -y --nogpgcheck localinstall /kubernetes/vagrant/resource/etcd-2.0.11-2.el7.x86_64.rpm`
 echo "systemctl start etcd..."
 echo `systemctl start etcd`
 
